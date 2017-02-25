@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ml.decorate.dao.IMenuDao">
+    <select id="queryMenuList" resultMap="menuResultMap">
+        select  t1.id,t1.menuName,t1.icon,
+        t2.id as sub_id,
+        t2.menuName as sub_menuName,
+        t2.icon as sub_icon
+         from t_menu t1 left join t_menu t2 on(t1.id = t2.parentId)
+          where t1.parentId=0 ORDER BY t1.order ASC
+    </select>
+    
+    <resultMap type="com.ml.decorate.model.Menu" id="menuResultMap">
+        <id property="id" column="id"/>
+        <result property="menuName" column="menuName"/>
+        <result property="icon" column="icon"/>
+        
+        <collection property="subMenuList" ofType="com.ml.decorate.model.Menu" >
+          <id property="id" column="sub_id"/>
+           <result property="menuName" column="sub_menuName"/>
+           <result property="icon" column="sub_icon"/>
+        </collection>
+       
+    </resultMap>
+</mapper>

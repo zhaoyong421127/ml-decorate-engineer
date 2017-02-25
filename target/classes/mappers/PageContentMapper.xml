@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ml.decorate.dao.IPageContentDao">
+    <select id="queryPageContent" resultType="com.ml.decorate.model.PageContent">
+       select content from t_page_content where menuId=#{menuId} 
+    </select>
+    
+   
+</mapper>
